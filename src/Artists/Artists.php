@@ -26,7 +26,7 @@ class Artists extends \MonsterCat\Client {
 
     public function call($search = '') {
 
-        $this->call(
+        $this->get(
             static::METHOD,
             $this,
             static::URI

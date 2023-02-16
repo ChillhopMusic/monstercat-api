@@ -39,7 +39,7 @@ class Client {
      * Loads the environment variables, these should be loaded in your application.
      *
      * add env variables:
-     * API_KEY, API_USER, API_ENDPOINT
+     * MONSTERCAT_API_KEY, MONSTERCAT_API_USER, MONSTERCAT_API_ENDPOINT
      *
      *
      * @throws Exception
