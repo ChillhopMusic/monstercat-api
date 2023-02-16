@@ -2,8 +2,6 @@
 
 namespace MonsterCat;
 
-use GuzzleHttp\Client;
-
 class Client {
 
     /**
@@ -17,7 +15,7 @@ class Client {
     public function get(string $method, object $params, string $uri) {
 
         $client = new GuzzleHttp\Client([
-            'base_uri' => API_ENDPOINT,
+            'base_uri' => MONSTERCAT_API_ENDPOINT,
             'timeout' => 2.0,
         ]);
 
