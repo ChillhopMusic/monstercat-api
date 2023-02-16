@@ -1,5 +1,5 @@
 {
-    "name": "darius00klokj/monstercat-api-client",
+    "name": "chillhopmusic/monstercat-api-client",
     "type": "library",
     "description": "MonsterCat API client for PHP",
     "keywords": ["monstercat","api"],
