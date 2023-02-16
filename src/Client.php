@@ -16,7 +16,7 @@ class Client {
      */
     public function get(string $method, object $params, string $uri) {
 
-        $client = new Client([
+        $client = new GuzzleHttp\Client([
             'base_uri' => API_ENDPOINT,
             'timeout' => 2.0,
         ]);
