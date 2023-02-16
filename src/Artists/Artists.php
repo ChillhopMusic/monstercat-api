@@ -24,7 +24,7 @@ class Artists extends \MonsterCat\Client {
     const METHOD = 'GET';
     const URI    = '/artists';
 
-    public function fetch($search = '') {
+    public function call($search = '') {
 
         $this->call(
             static::METHOD,

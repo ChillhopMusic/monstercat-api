@@ -7,11 +7,46 @@ use GuzzleHttp\Client;
 class Client {
 
     /**
-     * Loads the environment variables
+     *
+     * @param string $method GET, POST, PUT, DELETE
+     * @param object $params list of parameters to be sent.
+     * @param string $uri the endpoint we are triggering
      * 
+     * @return type
+     */
+    public function get(string $method, object $params, string $uri) {
+
+        $client = new Client([
+            'base_uri' => API_ENDPOINT,
+            'timeout' => 2.0,
+        ]);
+
+        $query = (array) $params;
+
+        $credentials = base64_encode(sprintf('%s:%s', API_KEY, API_USER));
+        $response    = $client->get($uri,
+            [
+                'query' => $query,
+                'headers' => [
+                    'Authorization' => 'Basic ' . $credentials,
+                ],
+            ]
+        );
+
+        return ($response->getBody());
+
+    }
+
+    /**
+     * Loads the environment variables, these should be loaded in your application.
+     *
+     * add env variables:
+     * API_KEY, API_USER, API_ENDPOINT
+     *
+     *
      * @throws Exception
      */
-    public function load() {
+    public function loadTest() {
 
         /**
          * Get the file and check if it exists
@@ -41,34 +76,5 @@ class Client {
                 define($name, $value);
             }
         }
-    }
-
-    /**
-     *
-     * @param string $method GET, POST, PUT, DELETE
-     * @param object $params list of parameters to be sent.
-     * @param string $uri the endpoint we are triggering
-     */
-    public function call(string $method, object $params, string $uri) {
-
-        $client = new Client([
-            'base_uri' => API_ENDPOINT,
-            'timeout' => 2.0,
-        ]);
-
-        $query = (array) $params;
-
-        $credentials = base64_encode(sprintf('%s:%s', API_KEY, API_USER));
-        $response    = $client->get($uri,
-            [
-                'query' => $query,
-                'headers' => [
-                    'Authorization' => 'Basic ' . $credentials,
-                ],
-            ]
-        );
-
-        var_dump($response->getBody());
-
     }
 }
