@@ -15,13 +15,13 @@ class Client {
     public function get(string $method, object $params, string $uri) {
 
         $client = new \GuzzleHttp\Client([
-            'base_uri' => MONSTERCAT_API_ENDPOINT,
+            'base_uri' => \MONSTERCAT_API_ENDPOINT,
             'timeout' => 2.0,
         ]);
 
         $query = (array) $params;
 
-        $credentials = base64_encode(sprintf('%s:%s', API_KEY, API_USER));
+        $credentials = base64_encode(sprintf('%s:%s', \MONSTERCAT_API_KEY, \MONSTERCAT_API_USER));
         $response    = $client->get($uri,
             [
                 'query' => $query,
