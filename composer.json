@@ -20,5 +20,11 @@
         "psr-4": {
             "MonsterCat\\": "src"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "src"
+        }
+    ]
 }

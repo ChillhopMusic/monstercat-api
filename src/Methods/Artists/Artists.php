@@ -1,10 +1,9 @@
 <?php
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
- */
 
-namespace MonsterCat\Artists;
+namespace MonsterCat\Methods\Artists;
+
+use MonsterCat\Client;
+use MonsterCat\Models\Artist;
 
 /**
  * Gets a list of Artists
@@ -13,24 +12,41 @@ namespace MonsterCat\Artists;
  *
  * @author darius
  */
-class Artists extends \MonsterCat\Client {
+class Artists extends Client {
     public $offset = 0;
     public $page   = 1;
     public $search = '';
     public $sort   = '-';
-    public $csv    = false;
-    public $limit  = 100;
+    public $csv    = null;
+    public $limit  = 25;
 
     const METHOD = 'GET';
     const URI    = '/artists';
 
-    public function call($search = '') {
+    /**
+     * Returns a list of artists based on the search
+     * 
+     * @param type $search
+     * @return boolean|\MonsterCat\Methods\Artists\Artist[]
+     */
+    public function call($search = ''): array|bool {
 
-        $this->get(
-            static::METHOD,
+        $res = $this->get(
             $this,
             static::URI
         );
+
+        if (!$res || !isset($res->Artists)) {
+            return false;
+        }
+
+        $returned_objects = ($res->Artists->Data);
+        $arts = [];
+        foreach ($returned_objects as $obj) {
+            $arts[] = new Artist($obj);
+        }
+
+        return $arts;
     }
 
     public function getOffset() {
@@ -80,4 +96,5 @@ class Artists extends \MonsterCat\Client {
     public function setLimit($limit): void {
         $this->limit = $limit;
     }
+
 }
